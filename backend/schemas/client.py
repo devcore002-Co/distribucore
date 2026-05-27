@@ -11,6 +11,8 @@ class ClientBase(BaseModel):
     address: str | None = None
     notes: str | None = None
     is_active: bool = True
+    latitude: float | None = None
+    longitude: float | None = None
 
 
 class ClientCreate(ClientBase):
@@ -25,6 +27,8 @@ class ClientUpdate(BaseModel):
     address: str | None = None
     notes: str | None = None
     is_active: bool | None = None
+    latitude: float | None = None
+    longitude: float | None = None
 
 
 class ClientOut(ClientBase):

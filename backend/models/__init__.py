@@ -7,8 +7,11 @@ from .client import Client
 from .order import Order
 from .order_item import OrderItem
 from .payment import Payment
+from .vehicle import Vehicle
+from .camera import Camera
 
 __all__ = [
     "User", "Category", "Supplier", "Product", "Batch",
     "Client", "Order", "OrderItem", "Payment",
+    "Vehicle", "Camera",
 ]

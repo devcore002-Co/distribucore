@@ -2,7 +2,7 @@ import { Outlet, NavLink, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import {
   LayoutDashboard, Package, ShoppingCart, Users, Truck,
-  BarChart3, Settings, LogOut, Bell, Menu, X
+  BarChart3, Settings, LogOut, Bell, Menu, X, Map, Camera
 } from 'lucide-react'
 import { useAuthStore } from '../store/auth'
 import api from '../api/client'
@@ -14,6 +14,8 @@ const NAV = [
   { to: '/clients', icon: Users, label: 'Clients' },
   { to: '/suppliers', icon: Truck, label: 'Suppliers' },
   { to: '/analytics', icon: BarChart3, label: 'Analytics' },
+  { to: '/map', icon: Map, label: 'Map' },
+  { to: '/cameras', icon: Camera, label: 'Cameras' },
   { to: '/settings', icon: Settings, label: 'Settings' },
 ]
 

@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from sqlalchemy import String, DateTime, Boolean, Integer, Text, Enum as SAEnum
+from sqlalchemy import String, DateTime, Boolean, Integer, Text, Float, Enum as SAEnum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from ..database import Base
 import enum
@@ -24,6 +24,8 @@ class Client(Base):
     # Outstanding balance in cents
     outstanding_balance: Mapped[int] = mapped_column(Integer, default=0)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+    latitude: Mapped[float | None] = mapped_column(Float, nullable=True)
+    longitude: Mapped[float | None] = mapped_column(Float, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
     orders: Mapped[list["Order"]] = relationship("Order", back_populates="client")

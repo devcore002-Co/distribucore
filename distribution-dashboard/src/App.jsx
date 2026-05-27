@@ -10,6 +10,8 @@ import ClientsPage from './pages/ClientsPage'
 import ClientDetailPage from './pages/ClientDetailPage'
 import SuppliersPage from './pages/SuppliersPage'
 import AnalyticsPage from './pages/AnalyticsPage'
+import MapPage from './pages/MapPage'
+import CamerasPage from './pages/CamerasPage'
 import SettingsPage from './pages/SettingsPage'
 
 function ProtectedRoute({ children }) {
@@ -37,6 +39,8 @@ export default function App() {
         <Route path="clients/:id" element={<ClientDetailPage />} />
         <Route path="suppliers" element={<SuppliersPage />} />
         <Route path="analytics" element={<AnalyticsPage />} />
+        <Route path="map" element={<MapPage />} />
+        <Route path="cameras" element={<CamerasPage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
     </Routes>

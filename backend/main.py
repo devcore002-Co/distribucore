@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routes import auth, products, batches, suppliers, clients, orders, analytics, export, categories, users
+from .routes import auth, products, batches, suppliers, clients, orders, analytics, export, categories, users, vehicles, cameras
 
 app = FastAPI(title="DistribuCore API", version="1.0.0")
 
@@ -27,6 +27,8 @@ app.include_router(analytics.router)
 app.include_router(export.router)
 app.include_router(categories.router)
 app.include_router(users.router)
+app.include_router(vehicles.router)
+app.include_router(cameras.router)
 
 
 @app.get("/health")
