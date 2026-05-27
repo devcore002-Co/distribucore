@@ -1,1 +1,8 @@
-from backend.main import app  # noqa: F401 — Vercel looks for `app` in this module
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/health")
+async def health():
+    return {"status": "ok", "env_test": "true"}
