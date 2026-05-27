@@ -1,4 +1,7 @@
+from pathlib import Path
 from pydantic_settings import BaseSettings
+
+_HERE = Path(__file__).parent
 
 
 class Settings(BaseSettings):
@@ -7,8 +10,7 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440
 
-    class Config:
-        env_file = ".env"
+    model_config = {"env_file": str(_HERE / ".env"), "extra": "ignore"}
 
 
 settings = Settings()
