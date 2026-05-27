@@ -1,23 +1,19 @@
 import sys
 import os
+import traceback
 from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 
 app = FastAPI()
 
+_error = None
+try:
+    from backend.main import app as _real_app
+    app = _real_app
+except Exception as _e:
+    _error = traceback.format_exc()
 
-@app.get("/health")
-async def health():
-    cwd = os.getcwd()
-    cwd_files = os.listdir(cwd)
-    task_files = os.listdir("/var/task") if os.path.exists("/var/task") else []
-    has_backend = os.path.exists(os.path.join(cwd, "backend"))
-    has_backend_task = os.path.exists("/var/task/backend")
-    return {
-        "cwd": cwd,
-        "cwd_files": sorted(cwd_files),
-        "task_files": sorted(task_files),
-        "has_backend_cwd": has_backend,
-        "has_backend_task": has_backend_task,
-        "sys_path": sys.path[:5],
-        "file": __file__,
-    }
+
+@app.get("/_debug")
+async def debug():
+    return JSONResponse({"error": _error, "ok": _error is None})
