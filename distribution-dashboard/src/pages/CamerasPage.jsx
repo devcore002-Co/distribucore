@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Video, VideoOff, Plus, X, Pencil, Trash2, Wifi, WifiOff } from 'lucide-react'
 import api from '../api/client'
-import { Modal } from '../components/ui/Modal'
 import toast from 'react-hot-toast'
 
 function CameraFormModal({ camera, onClose, onSaved }) {
@@ -30,8 +29,8 @@ function CameraFormModal({ camera, onClose, onSaved }) {
   }
 
   return (
-    <Modal onClose={onClose}>
-      <div className="p-6 w-full max-w-md">
+    <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="bg-white rounded-xl shadow-xl p-6 w-full max-w-md" onClick={e => e.stopPropagation()}>
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-lg font-semibold text-gray-900">{camera ? 'Edit Camera' : 'Add Camera'}</h2>
           <button onClick={onClose}><X size={18} className="text-gray-400 hover:text-gray-600" /></button>
@@ -65,7 +64,7 @@ function CameraFormModal({ camera, onClose, onSaved }) {
           <button className="btn-primary" onClick={save} disabled={saving}>{saving ? 'Saving…' : 'Save'}</button>
         </div>
       </div>
-    </Modal>
+    </div>
   )
 }
 

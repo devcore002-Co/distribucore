@@ -1,10 +1,9 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { MapPin, Truck, Plus, X, RefreshCw } from 'lucide-react'
 import api from '../api/client'
-import { Modal } from '../components/ui/Modal'
 import toast from 'react-hot-toast'
 
 // Fix Leaflet default icon URLs broken by bundlers
@@ -69,8 +68,8 @@ function VehicleModal({ vehicle, onClose, onSaved }) {
   }
 
   return (
-    <Modal onClose={onClose}>
-      <div className="p-6 w-full max-w-md">
+    <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="bg-white rounded-xl shadow-xl p-6 w-full max-w-md" onClick={e => e.stopPropagation()}>
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-lg font-semibold text-gray-900">{vehicle ? 'Edit Vehicle' : 'Add Vehicle'}</h2>
           <button onClick={onClose}><X size={18} className="text-gray-400 hover:text-gray-600" /></button>
@@ -104,7 +103,7 @@ function VehicleModal({ vehicle, onClose, onSaved }) {
           <button className="btn-primary" onClick={save} disabled={saving}>{saving ? 'Saving…' : 'Save'}</button>
         </div>
       </div>
-    </Modal>
+    </div>
   )
 }
 
@@ -131,8 +130,8 @@ function ClientLocationModal({ client, onClose, onSaved }) {
   }
 
   return (
-    <Modal onClose={onClose}>
-      <div className="p-6 w-full max-w-sm">
+    <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="bg-white rounded-xl shadow-xl p-6 w-full max-w-sm" onClick={e => e.stopPropagation()}>
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-lg font-semibold text-gray-900">Set Store Location</h2>
           <button onClick={onClose}><X size={18} className="text-gray-400 hover:text-gray-600" /></button>
@@ -151,7 +150,7 @@ function ClientLocationModal({ client, onClose, onSaved }) {
           <button className="btn-primary" onClick={save} disabled={saving}>{saving ? 'Saving…' : 'Save'}</button>
         </div>
       </div>
-    </Modal>
+    </div>
   )
 }
 
