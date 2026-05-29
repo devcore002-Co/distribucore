@@ -24,8 +24,9 @@ export default function LoginPage() {
       })
       setAuth(tokenData.access_token, userData)
       navigate('/')
-    } catch {
-      toast.error('Invalid email or password')
+    } catch (err) {
+      console.error('Login error:', err.response?.status, err.response?.data, err.message)
+      toast.error(err.response?.data?.detail || 'Invalid email or password')
     }
   }
 
