@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
+from starlette.responses import Response
 from .routes import auth, products, batches, suppliers, clients, orders, analytics, export, categories, users, vehicles, cameras
 from .seed import seed
 
@@ -22,6 +23,17 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.options("/{full_path:path}")
+async def options_handler(full_path: str):
+    return Response(
+        status_code=200,
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        }
+    )
 
 app.include_router(auth.router)
 app.include_router(products.router)
