@@ -20,10 +20,18 @@ const storeIcon = new L.Icon({
   iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41],
 })
 
-const vehicleIcon = new L.Icon({
-  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-  iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41],
+const vehicleIcon = new L.DivIcon({
+  html: `<div style="width: 40px; height: 40px; background: #ef4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.3); border: 2px solid white;">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <ellipse cx="12" cy="17" rx="8" ry="4"></ellipse>
+      <path d="M21 17v-4c0-1-1-2-2-2h-1v-2c0-1-1-2-2-2h-6c-1 0-2 1-2 2v2H5c-1 0-2 1-2 2v4"></path>
+      <circle cx="7" cy="20" r="2" fill="white"></circle>
+      <circle cx="17" cy="20" r="2" fill="white"></circle>
+    </svg>
+  </div>`,
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+  popupAnchor: [0, -40],
 })
 
 const STATUS_COLORS = { active: 'bg-green-100 text-green-700', parked: 'bg-gray-100 text-gray-600', maintenance: 'bg-amber-100 text-amber-700' }
