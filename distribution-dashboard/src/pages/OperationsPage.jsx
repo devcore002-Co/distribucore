@@ -21,12 +21,12 @@ const storeIcon = new L.Icon({
 })
 
 const vehicleIcon = new L.DivIcon({
-  html: `<div style="width: 40px; height: 40px; background: #ef4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.3); border: 2px solid white;">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <ellipse cx="12" cy="17" rx="8" ry="4"></ellipse>
-      <path d="M21 17v-4c0-1-1-2-2-2h-1v-2c0-1-1-2-2-2h-6c-1 0-2 1-2 2v2H5c-1 0-2 1-2 2v4"></path>
-      <circle cx="7" cy="20" r="2" fill="white"></circle>
-      <circle cx="17" cy="20" r="2" fill="white"></circle>
+  html: `<div style="width: 40px; height: 40px; background: #dc2626; border-radius: 4px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.4); border: 2px solid white; color: white;">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="1" y="6" width="22" height="12" rx="2"></rect>
+      <path d="M1 12h22M7 18v2M17 18v2"></path>
+      <path d="M4 6l-2 4h20l-2-4"></path>
+      <rect x="2" y="6" width="4" height="4" rx="1" fill="white" opacity="0.3"></rect>
     </svg>
   </div>`,
   iconSize: [40, 40],
