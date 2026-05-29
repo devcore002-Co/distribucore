@@ -14,10 +14,11 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="DistribuCore API", version="1.0.0", lifespan=lifespan)
 
+# CORS must be added first
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=False,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
