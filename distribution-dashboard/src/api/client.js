@@ -1,8 +1,7 @@
 import axios from 'axios'
 import { useAuthStore } from '../store/auth'
 
-const baseURL = import.meta.env.VITE_API_URL || 'https://distribucore-api-dev-core-s-projects.vercel.app'
-const api = axios.create({ baseURL })
+const api = axios.create({ baseURL: '/api' })
 
 api.interceptors.request.use((config) => {
   const token = useAuthStore.getState().token
