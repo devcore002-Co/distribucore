@@ -1,8 +1,8 @@
-import { Outlet, NavLink, useNavigate } from 'react-router-dom'
+import { Outlet, NavLink } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import {
   LayoutDashboard, Package, ShoppingCart, Users, Truck,
-  BarChart3, Settings, LogOut, Bell, Menu, X, Zap
+  BarChart3, Settings, Bell, Menu, Zap
 } from 'lucide-react'
 import { useAuthStore } from '../store/auth'
 import api from '../api/client'
@@ -19,8 +19,6 @@ const NAV = [
 ]
 
 export default function Layout() {
-  const { user, logout } = useAuthStore()
-  const navigate = useNavigate()
   const [alerts, setAlerts] = useState(0)
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
@@ -32,8 +30,6 @@ export default function Layout() {
       setAlerts(low.data.length + expiring.data.length)
     }).catch(() => {})
   }, [])
-
-  const handleLogout = () => { logout(); navigate('/login') }
 
   return (
     <div className="flex h-screen overflow-hidden bg-page">
@@ -73,15 +69,12 @@ export default function Layout() {
         <div className="p-4 border-t border-white/10">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-mint/20 flex items-center justify-center text-mint font-semibold text-sm uppercase">
-              {user?.username?.[0] || 'U'}
+              D
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-white text-sm font-medium truncate">{user?.username}</p>
-              <p className="text-white/40 text-xs capitalize">{user?.role}</p>
+              <p className="text-white text-sm font-medium truncate">DistribuCore</p>
+              <p className="text-white/40 text-xs capitalize">Warehouse</p>
             </div>
-            <button onClick={handleLogout} className="text-white/40 hover:text-white transition-colors">
-              <LogOut size={16} />
-            </button>
           </div>
         </div>
       </aside>
