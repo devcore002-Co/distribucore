@@ -18,7 +18,6 @@ async def list_clients(
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(current_user),
 ):
     q = select(Client).where(Client.is_active == True).offset((page - 1) * page_size).limit(page_size)
     result = await db.execute(q)
