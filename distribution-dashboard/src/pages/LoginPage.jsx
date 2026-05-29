@@ -18,15 +18,37 @@ export default function LoginPage() {
 
   const onSubmit = async (data) => {
     try {
-      const { data: tokenData } = await api.post('/auth/login', data)
-      const { data: userData } = await api.get('/auth/me', {
+      const apiUrl = 'https://distribucore-api-dev-core-s-projects.vercel.app'
+      console.log('Logging in with:', data, 'to', apiUrl)
+
+      const loginRes = await fetch(`${apiUrl}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      console.log('Login response status:', loginRes.status)
+
+      if (!loginRes.ok) {
+        const error = await loginRes.text()
+        console.error('Login error response:', error)
+        throw new Error(`Login failed: ${loginRes.status}`)
+      }
+
+      const tokenData = await loginRes.json()
+      console.log('Got token:', tokenData.access_token?.slice(0, 20) + '...')
+
+      const meRes = await fetch(`${apiUrl}/auth/me`, {
         headers: { Authorization: `Bearer ${tokenData.access_token}` }
       })
+
+      if (!meRes.ok) throw new Error('Failed to get user data')
+
+      const userData = await meRes.json()
       setAuth(tokenData.access_token, userData)
       navigate('/')
     } catch (err) {
-      console.error('Login error:', err.response?.status, err.response?.data, err.message)
-      toast.error(err.response?.data?.detail || 'Invalid email or password')
+      console.error('Login error:', err)
+      toast.error(err.message || 'Invalid email or password')
     }
   }
 
