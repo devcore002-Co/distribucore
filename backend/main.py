@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response
 from contextlib import asynccontextmanager
 from .routes import auth, products, batches, suppliers, clients, orders, analytics, export, categories, users, vehicles, cameras
 from .seed import seed
@@ -16,11 +17,19 @@ app = FastAPI(title="DistribuCore API", version="1.0.0", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://distribucore-dashboard.vercel.app", "http://localhost:5173", "http://localhost:5174"],
+    allow_origins=["https://distribucore-dashboard.vercel.app", "http://localhost:5173", "http://localhost:5174", "*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.middleware("http")
+async def add_cors_header(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+    return response
 
 app.include_router(auth.router)
 app.include_router(products.router)
