@@ -6,7 +6,10 @@ from .seed import seed
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    await seed()
+    try:
+        await seed()
+    except Exception as e:
+        print(f"Seed error (non-fatal): {e}")
     yield
 
 app = FastAPI(title="DistribuCore API", version="1.0.0", lifespan=lifespan)
