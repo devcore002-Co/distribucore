@@ -26,7 +26,11 @@ const mockData = {
   margins: Array.from({ length: 15 }, (_, i) => ({ id: i + 1, name: `Product ${i + 1}`, cost_price: Math.floor(Math.random() * 10) + 5, selling_price: Math.floor(Math.random() * 20) + 15, margin: Math.floor(Math.random() * 50) + 5, margin_pct: Math.floor(Math.random() * 40) + 10 })),
   creditOverview: { total: 15000, buckets: { current: 5000, '30': 3000, '60': 4000, '90+': 3000 }, clients: [] },
   inventoryValue: { total_cost: 45000, total_selling: 75000, by_category: [{ name: 'Dairy', cost: 12000, selling: 20000 }, { name: 'Juice', cost: 10000, selling: 18000 }, { name: 'Others', cost: 23000, selling: 37000 }] },
-  expiryRisk: [{ batch_code: 'B001', product_name: 'Milk', expiry_date: '2026-06-15', days_to_expiry: 17 }],
+  expiryRisk: {
+    '30': [{ batch_id: 1, product_name: 'Milk', quantity: 50, expiry_date: '2026-06-15' }],
+    '60': [{ batch_id: 2, product_name: 'Juice', quantity: 30, expiry_date: '2026-07-15' }],
+    '90': []
+  },
   lowStock: []
 }
 
