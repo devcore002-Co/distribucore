@@ -1,7 +1,5 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
-import { useAuthStore } from './store/auth'
+import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
-import LoginPage from './pages/LoginPage'
 import DashboardPage from './pages/DashboardPage'
 import InventoryPage from './pages/InventoryPage'
 import OrdersPage from './pages/OrdersPage'
@@ -14,21 +12,13 @@ import MapPage from './pages/MapPage'
 import CamerasPage from './pages/CamerasPage'
 import SettingsPage from './pages/SettingsPage'
 
-function ProtectedRoute({ children }) {
-  const token = useAuthStore((s) => s.token)
-  return token ? children : <Navigate to="/login" replace />
-}
-
 export default function App() {
   return (
     <Routes>
-      <Route path="/login" element={<LoginPage />} />
       <Route
         path="/"
         element={
-          <ProtectedRoute>
-            <Layout />
-          </ProtectedRoute>
+          <Layout />
         }
       >
         <Route index element={<DashboardPage />} />
