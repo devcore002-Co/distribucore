@@ -85,6 +85,7 @@ export default function ClientsPage() {
             <Th>Type</Th>
             <Th>Phone</Th>
             <Th>Email</Th>
+            <Th>Location</Th>
             <Th>Outstanding Balance</Th>
           </tr>
         </thead>
@@ -95,6 +96,13 @@ export default function ClientsPage() {
               <Td><Badge className={typeColor(c.type)}>{c.type}</Badge></Td>
               <Td>{c.phone || '—'}</Td>
               <Td>{c.email || '—'}</Td>
+              <Td>
+                {c.latitude && c.longitude ? (
+                  <span className="text-xs font-mono text-gray-600">{c.latitude.toFixed(4)}, {c.longitude.toFixed(4)}</span>
+                ) : (
+                  <span className="text-gray-400 text-xs">Not set</span>
+                )}
+              </Td>
               <Td>
                 <span className={c.outstanding_balance > 0 ? 'text-amber-600 font-semibold' : 'text-gray-400'}>
                   {formatCurrency(c.outstanding_balance)}
