@@ -1,8 +1,15 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from contextlib import asynccontextmanager
 from .routes import auth, products, batches, suppliers, clients, orders, analytics, export, categories, users, vehicles, cameras
+from .seed import seed
 
-app = FastAPI(title="DistribuCore API", version="1.0.0")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await seed()
+    yield
+
+app = FastAPI(title="DistribuCore API", version="1.0.0", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
