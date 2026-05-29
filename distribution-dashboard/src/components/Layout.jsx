@@ -95,7 +95,7 @@ export default function Layout() {
               </span>
             )}
           </button>
-          <span className="text-sm text-gray-600 font-medium">{user?.username}</span>
+          <span className="text-sm text-gray-600 font-medium">Warehouse</span>
         </header>
 
         {/* Content */}
