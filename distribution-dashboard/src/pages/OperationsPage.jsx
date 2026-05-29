@@ -310,7 +310,7 @@ export default function OperationsPage() {
     ...(activeFilter !== 'stores' ? mappedVehicles.map(v => [v.latitude, v.longitude]) : []),
   ]
 
-  const defaultCenter = allPoints.length > 0 ? allPoints[0] : [24.7136, 46.6753]
+  const defaultCenter = allPoints.length > 0 ? allPoints[0] : [5.6037, -0.1870]
   const active = cameras.filter(c => c.is_active).length
 
   return (
