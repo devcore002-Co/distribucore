@@ -98,7 +98,15 @@ export default function ClientsPage() {
               <Td>{c.email || '—'}</Td>
               <Td>
                 {c.latitude && c.longitude ? (
-                  <span className="text-xs font-mono text-gray-600">{c.latitude.toFixed(4)}, {c.longitude.toFixed(4)}</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-mono text-gray-600">{c.latitude.toFixed(4)}, {c.longitude.toFixed(4)}</span>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); navigate('/operations'); }}
+                      className="text-xs text-blue-600 hover:text-blue-800 hover:underline font-medium"
+                    >
+                      View on Map
+                    </button>
+                  </div>
                 ) : (
                   <span className="text-gray-400 text-xs">Not set</span>
                 )}
@@ -110,7 +118,7 @@ export default function ClientsPage() {
               </Td>
             </Tr>
           ))}
-          {clients.length === 0 && <Tr><Td colSpan={5} className="text-center text-gray-400 py-8">No clients found</Td></Tr>}
+          {clients.length === 0 && <Tr><Td colSpan={6} className="text-center text-gray-400 py-8">No clients found</Td></Tr>}
         </tbody>
       </Table>
 
