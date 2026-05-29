@@ -13,7 +13,21 @@ const mockData = {
   clients: [
     { id: 1, name: 'Client A', type: 'wholesaler', latitude: 5.6150, longitude: -0.1800, is_active: true },
     { id: 2, name: 'Client B', type: 'retailer', latitude: 5.5950, longitude: -0.1950, is_active: true },
-  ]
+  ],
+  salesMonthly: Array.from({ length: 12 }, (_, i) => ({ month: i + 1, revenue: Math.floor(Math.random() * 50000) + 10000 })),
+  topProducts: Array.from({ length: 10 }, (_, i) => ({ id: i + 1, name: `Product ${i + 1}`, quantity: Math.floor(Math.random() * 100) + 10, revenue: Math.floor(Math.random() * 10000) + 1000 })),
+  categories: [
+    { name: 'Dairy', value: 3500 },
+    { name: 'Juice', value: 2800 },
+    { name: 'Beverage', value: 3200 },
+    { name: 'Dried Goods', value: 1800 },
+    { name: 'Confectionery', value: 2700 },
+  ],
+  margins: Array.from({ length: 15 }, (_, i) => ({ id: i + 1, name: `Product ${i + 1}`, cost_price: Math.floor(Math.random() * 10) + 5, selling_price: Math.floor(Math.random() * 20) + 15, margin: Math.floor(Math.random() * 50) + 5, margin_pct: Math.floor(Math.random() * 40) + 10 })),
+  creditOverview: { total: 15000, buckets: { current: 5000, '30': 3000, '60': 4000, '90+': 3000 }, clients: [] },
+  inventoryValue: { total_cost: 45000, total_selling: 75000, by_category: [{ name: 'Dairy', cost: 12000, selling: 20000 }, { name: 'Juice', cost: 10000, selling: 18000 }, { name: 'Others', cost: 23000, selling: 37000 }] },
+  expiryRisk: [{ batch_code: 'B001', product_name: 'Milk', expiry_date: '2026-06-15', days_to_expiry: 17 }],
+  lowStock: []
 }
 
 let nextId = { vehicles: 100, cameras: 100 }
@@ -24,6 +38,14 @@ const api = {
     if (endpoint === '/vehicles') return { data: mockData.vehicles }
     if (endpoint === '/cameras') return { data: mockData.cameras }
     if (endpoint === '/clients') return { data: mockData.clients }
+    if (endpoint.includes('/analytics/sales-monthly')) return { data: mockData.salesMonthly }
+    if (endpoint.includes('/analytics/top-products')) return { data: mockData.topProducts }
+    if (endpoint.includes('/analytics/category-breakdown')) return { data: mockData.categories }
+    if (endpoint.includes('/analytics/profit-margins')) return { data: mockData.margins }
+    if (endpoint.includes('/analytics/credit-overview')) return { data: mockData.creditOverview }
+    if (endpoint.includes('/analytics/inventory-value')) return { data: mockData.inventoryValue }
+    if (endpoint.includes('/analytics/expiry-risk')) return { data: mockData.expiryRisk }
+    if (endpoint.includes('/analytics/low-stock')) return { data: mockData.lowStock }
     return { data: [] }
   },
   post: async (endpoint, data) => {
