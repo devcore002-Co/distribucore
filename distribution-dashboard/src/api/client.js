@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: '/api'
+  baseURL: 'https://distribucore-api-dev-core-s-projects.vercel.app'
 })
 
 api.interceptors.response.use(
