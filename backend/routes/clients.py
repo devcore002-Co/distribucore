@@ -7,8 +7,6 @@ from ..database import get_db
 from ..models.client import Client
 from ..models.order import Order, OrderStatus
 from ..schemas.client import ClientCreate, ClientUpdate, ClientOut
-from .deps import current_user
-from ..models.user import User
 
 router = APIRouter(prefix="/clients", tags=["clients"])
 
@@ -28,7 +26,6 @@ async def list_clients(
 async def create_client(
     body: ClientCreate,
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(current_user),
 ):
     client = Client(**body.model_dump())
     db.add(client)
@@ -40,7 +37,6 @@ async def create_client(
 @router.get("/credit")
 async def clients_with_credit(
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(current_user),
 ):
     result = await db.execute(
         select(Client).options(selectinload(Client.orders))
@@ -71,7 +67,6 @@ async def clients_with_credit(
 async def get_client(
     client_id: int,
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(current_user),
 ):
     result = await db.execute(select(Client).where(Client.id == client_id))
     client = result.scalar_one_or_none()
@@ -85,7 +80,6 @@ async def update_client(
     client_id: int,
     body: ClientUpdate,
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(current_user),
 ):
     result = await db.execute(select(Client).where(Client.id == client_id))
     client = result.scalar_one_or_none()
@@ -102,7 +96,6 @@ async def update_client(
 async def delete_client(
     client_id: int,
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(current_user),
 ):
     result = await db.execute(select(Client).where(Client.id == client_id))
     client = result.scalar_one_or_none()
@@ -116,7 +109,6 @@ async def delete_client(
 async def client_orders(
     client_id: int,
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(current_user),
 ):
     result = await db.execute(
         select(Order).where(Order.client_id == client_id).order_by(Order.order_date.desc())
@@ -139,7 +131,6 @@ async def client_orders(
 async def client_balance(
     client_id: int,
     db: AsyncSession = Depends(get_db),
-    _: User = Depends(current_user),
 ):
     result = await db.execute(select(Client).where(Client.id == client_id))
     client = result.scalar_one_or_none()
