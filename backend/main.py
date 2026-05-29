@@ -48,4 +48,4 @@ app.include_router(cameras.router)
 
 @app.get("/health")
 async def health():
-    return {"status": "ok", "timestamp": "updated"}
+    return {"status": "DEPLOYED_AT_" + str(__import__('datetime').datetime.now())}
