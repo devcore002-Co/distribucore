@@ -16,30 +16,58 @@ const mockData = {
   ]
 }
 
+let nextId = { vehicles: 100, cameras: 100 }
+
 const api = {
   get: async (endpoint) => {
-    // Simulate API delay
     await new Promise(r => setTimeout(r, 300))
-
     if (endpoint === '/vehicles') return { data: mockData.vehicles }
     if (endpoint === '/cameras') return { data: mockData.cameras }
     if (endpoint === '/clients') return { data: mockData.clients }
-
     return { data: [] }
   },
   post: async (endpoint, data) => {
     await new Promise(r => setTimeout(r, 300))
-    const newItem = { ...data, id: Math.random() }
-    if (endpoint === '/vehicles') mockData.vehicles.push(newItem)
-    if (endpoint === '/cameras') mockData.cameras.push(newItem)
-    return { data: newItem }
+    if (endpoint === '/vehicles') {
+      const newVehicle = { ...data, id: nextId.vehicles++ }
+      mockData.vehicles.push(newVehicle)
+      return { data: newVehicle }
+    }
+    if (endpoint === '/cameras') {
+      const newCamera = { ...data, id: nextId.cameras++ }
+      mockData.cameras.push(newCamera)
+      return { data: newCamera }
+    }
+    return { data }
   },
   patch: async (endpoint, data) => {
     await new Promise(r => setTimeout(r, 300))
+    const id = parseInt(endpoint.split('/').pop())
+    if (endpoint.includes('/vehicles')) {
+      const idx = mockData.vehicles.findIndex(v => v.id === id)
+      if (idx >= 0) mockData.vehicles[idx] = { ...mockData.vehicles[idx], ...data }
+    }
+    if (endpoint.includes('/cameras')) {
+      const idx = mockData.cameras.findIndex(c => c.id === id)
+      if (idx >= 0) mockData.cameras[idx] = { ...mockData.cameras[idx], ...data }
+    }
+    if (endpoint.includes('/clients')) {
+      const idx = mockData.clients.findIndex(c => c.id === id)
+      if (idx >= 0) mockData.clients[idx] = { ...mockData.clients[idx], ...data }
+    }
     return { data }
   },
   delete: async (endpoint) => {
     await new Promise(r => setTimeout(r, 300))
+    const id = parseInt(endpoint.split('/').pop())
+    if (endpoint.includes('/vehicles')) {
+      const idx = mockData.vehicles.findIndex(v => v.id === id)
+      if (idx >= 0) mockData.vehicles.splice(idx, 1)
+    }
+    if (endpoint.includes('/cameras')) {
+      const idx = mockData.cameras.findIndex(c => c.id === id)
+      if (idx >= 0) mockData.cameras.splice(idx, 1)
+    }
     return { data: null }
   }
 }
