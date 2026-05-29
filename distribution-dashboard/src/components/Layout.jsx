@@ -4,7 +4,6 @@ import {
   LayoutDashboard, Package, ShoppingCart, Users, Truck,
   BarChart3, Settings, Bell, Menu, Zap
 } from 'lucide-react'
-import { useAuthStore } from '../store/auth'
 import api from '../api/client'
 
 const NAV = [
