@@ -40,12 +40,8 @@ export default function Layout() {
       {/* Sidebar */}
       <aside className={`fixed inset-y-0 left-0 z-30 w-60 bg-navy flex flex-col transition-transform duration-200 lg:static lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         {/* Logo */}
-        <div className="flex items-center gap-3 px-6 py-5 border-b border-white/10">
-          <img src="/logo.png" alt="Golden Cedar" className="w-10 h-10 rounded-lg object-contain" />
-          <div>
-            <span className="text-white font-semibold text-lg block">Golden Cedar</span>
-            <span className="text-white/60 text-xs">Trading Company</span>
-          </div>
+        <div className="flex items-center justify-center px-6 py-5 border-b border-white/10">
+          <img src="/logo.png" alt="Golden Cedar" className="w-12 h-12 object-contain" />
         </div>
 
         {/* Nav */}
@@ -68,13 +64,8 @@ export default function Layout() {
         </nav>
 
         {/* User */}
-        <div className="p-4 border-t border-white/10">
-          <div className="flex items-center gap-3">
-            <img src="/logo.png" alt="Golden Cedar" className="w-8 h-8 rounded-full object-contain" />
-            <div className="flex-1 min-w-0">
-              <p className="text-white text-sm font-medium truncate">Golden Cedar</p>
-              <p className="text-white/40 text-xs capitalize">Trading Co.</p>
-            </div>
+        <div className="p-4 border-t border-white/10 flex items-center justify-center">
+          <img src="/logo.png" alt="Golden Cedar" className="w-10 h-10 object-contain" />
           </div>
         </div>
       </aside>
