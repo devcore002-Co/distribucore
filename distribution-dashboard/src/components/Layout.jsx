@@ -66,7 +66,6 @@ export default function Layout() {
         {/* User */}
         <div className="p-4 border-t border-white/10 flex items-center justify-center">
           <img src="/logo.png" alt="Golden Cedar" className="w-10 h-10 object-contain" />
-          </div>
         </div>
       </aside>
 
