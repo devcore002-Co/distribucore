@@ -9,11 +9,10 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Brand */}
           <div className="text-center md:text-left">
-            <div className="flex items-center gap-2.5 justify-center md:justify-start mb-3">
-              <div className="w-9 h-9 rounded-lg bg-mint flex items-center justify-center font-bold text-navy text-sm">DC</div>
-              <span className="font-semibold text-lg">DistribuCore</span>
+            <div className="flex items-center justify-center md:justify-start mb-3">
+              <img src="/logo.png" alt="Golden Cedar" className="h-10 w-10 object-contain" />
             </div>
-            <p className="text-white/40 text-sm">Your trusted F&B distribution partner</p>
+            <p className="text-white/40 text-sm">Your trusted trading partner</p>
           </div>
 
           {/* Social links */}
@@ -45,7 +44,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/10 mt-8 pt-8 text-center text-white/30 text-xs">
-          © {new Date().getFullYear()} DistribuCore. All rights reserved.
+          © {new Date().getFullYear()} Golden Cedar Trading Company. All rights reserved.
         </div>
       </div>
     </footer>
