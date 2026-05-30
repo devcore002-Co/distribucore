@@ -41,8 +41,11 @@ export default function Layout() {
       <aside className={`fixed inset-y-0 left-0 z-30 w-60 bg-navy flex flex-col transition-transform duration-200 lg:static lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         {/* Logo */}
         <div className="flex items-center gap-3 px-6 py-5 border-b border-white/10">
-          <div className="w-10 h-10 rounded-lg bg-mint flex items-center justify-center font-bold text-navy text-lg">DC</div>
-          <span className="text-white font-semibold text-lg">DistribuCore</span>
+          <img src="/logo.png" alt="Golden Cedar" className="w-10 h-10 rounded-lg object-contain" />
+          <div>
+            <span className="text-white font-semibold text-lg block">Golden Cedar</span>
+            <span className="text-white/60 text-xs">Trading Company</span>
+          </div>
         </div>
 
         {/* Nav */}
@@ -67,12 +70,10 @@ export default function Layout() {
         {/* User */}
         <div className="p-4 border-t border-white/10">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-mint/20 flex items-center justify-center text-mint font-semibold text-sm uppercase">
-              D
-            </div>
+            <img src="/logo.png" alt="Golden Cedar" className="w-8 h-8 rounded-full object-contain" />
             <div className="flex-1 min-w-0">
-              <p className="text-white text-sm font-medium truncate">DistribuCore</p>
-              <p className="text-white/40 text-xs capitalize">Warehouse</p>
+              <p className="text-white text-sm font-medium truncate">Golden Cedar</p>
+              <p className="text-white/40 text-xs capitalize">Trading Co.</p>
             </div>
           </div>
         </div>
@@ -94,7 +95,7 @@ export default function Layout() {
               </span>
             )}
           </button>
-          <span className="text-sm text-gray-600 font-medium">Warehouse</span>
+          <span className="text-sm text-gray-600 font-medium">Golden Cedar Trading</span>
         </header>
 
         {/* Content */}
