@@ -14,6 +14,9 @@ export default function ClientDetailPage() {
   const [orders, setOrders] = useState([])
   const [balance, setBalance] = useState(null)
   const [tab, setTab] = useState('orders')
+  const [editingLocation, setEditingLocation] = useState(false)
+  const [lat, setLat] = useState('')
+  const [lng, setLng] = useState('')
 
   useEffect(() => {
     api.get(`/clients/${id}`).then(r => setClient(r.data)).catch(() => {})
@@ -32,7 +35,7 @@ export default function ClientDetailPage() {
       </div>
 
       {/* Header */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
         <div className="bg-white rounded-xl p-4 border border-gray-100">
           <p className="text-xs text-gray-500 mb-1">Phone</p>
           <p className="font-medium text-gray-900">{client.phone || '—'}</p>
@@ -40,6 +43,69 @@ export default function ClientDetailPage() {
         <div className="bg-white rounded-xl p-4 border border-gray-100">
           <p className="text-xs text-gray-500 mb-1">Email</p>
           <p className="font-medium text-gray-900 truncate">{client.email || '—'}</p>
+        </div>
+        <div className="bg-white rounded-xl p-4 border border-gray-100">
+          <p className="text-xs text-gray-500 mb-1">Location</p>
+          {!editingLocation ? (
+            <div>
+              <p className="font-mono text-sm text-gray-900">
+                {client.latitude && client.longitude
+                  ? `${client.latitude.toFixed(4)}, ${client.longitude.toFixed(4)}`
+                  : '—'}
+              </p>
+              <button
+                onClick={() => {
+                  setEditingLocation(true)
+                  setLat(client.latitude || '')
+                  setLng(client.longitude || '')
+                }}
+                className="text-xs text-blue-600 hover:underline mt-1"
+              >
+                Edit
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              <input
+                type="number"
+                step="0.0001"
+                placeholder="Latitude"
+                value={lat}
+                onChange={(e) => setLat(e.target.value)}
+                className="w-full input-field text-sm"
+              />
+              <input
+                type="number"
+                step="0.0001"
+                placeholder="Longitude"
+                value={lng}
+                onChange={(e) => setLng(e.target.value)}
+                className="w-full input-field text-sm"
+              />
+              <div className="flex gap-2">
+                <button
+                  onClick={() => {
+                    api.patch(`/clients/${id}`, { latitude: lat ? parseFloat(lat) : null, longitude: lng ? parseFloat(lng) : null })
+                      .then(() => {
+                        setClient({ ...client, latitude: lat ? parseFloat(lat) : null, longitude: lng ? parseFloat(lng) : null })
+                        setEditingLocation(false)
+                        toast.success('Location updated')
+                      })
+                      .catch(() => toast.error('Failed to update location'))
+                  }}
+                  className="btn-primary text-xs py-1 px-2"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={() => setEditingLocation(false)}
+                  className="btn-outline text-xs py-1 px-2"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          )}
         </div>
         <div className="bg-white rounded-xl p-4 border border-gray-100">
           <p className="text-xs text-gray-500 mb-1">Total Orders</p>
