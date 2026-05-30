@@ -85,7 +85,6 @@ export default function Layout() {
               </span>
             )}
           </button>
-          <span className="text-sm text-gray-600 font-medium">Golden Cedar Trading</span>
         </header>
 
         {/* Content */}
